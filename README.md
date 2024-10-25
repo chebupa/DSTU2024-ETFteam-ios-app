@@ -1,2 +1,2 @@
-# ios app for oggetto
+# iOS app for Oggetto
 ofngil
