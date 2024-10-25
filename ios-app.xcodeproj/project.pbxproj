@@ -6,14 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4619CA662CCC23E900C3D9FE /* SwiftNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 4619CA652CCC23E900C3D9FE /* SwiftNavigation */; };
+		4619CA682CCC23E900C3D9FE /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 4619CA672CCC23E900C3D9FE /* SwiftUINavigation */; };
+		461AD0C02CCC3BDE002B3774 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 461AD0BF2CCC3BDE002B3774 /* RswiftLibrary */; };
+		461AD0C22CCC3BDE002B3774 /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 461AD0C12CCC3BDE002B3774 /* rswift */; };
+		46E85CA72CCC06F2007D92C1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 46E85CA62CCC06F2007D92C1 /* Alamofire */; };
+		46E85CAA2CCC0738007D92C1 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 46E85CA92CCC0738007D92C1 /* Dependencies */; };
+		46E85CAC2CCC0738007D92C1 /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 46E85CAB2CCC0738007D92C1 /* DependenciesMacros */; };
+		46E85CC32CCC1C58007D92C1 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 46E85CC22CCC1C58007D92C1 /* KeychainAccess */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		46001C8E2CCBF07E00D656D3 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		46001C902CCBF07E00D656D3 /* ios-app */ = {
+		46001C902CCBF07E00D656D3 /* Application */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "ios-app";
+			path = Application;
+			sourceTree = "<group>";
+		};
+		46001CBA2CCBFC2700D656D3 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +39,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46E85CC32CCC1C58007D92C1 /* KeychainAccess in Frameworks */,
+				46E85CA72CCC06F2007D92C1 /* Alamofire in Frameworks */,
+				4619CA682CCC23E900C3D9FE /* SwiftUINavigation in Frameworks */,
+				4619CA662CCC23E900C3D9FE /* SwiftNavigation in Frameworks */,
+				461AD0C02CCC3BDE002B3774 /* RswiftLibrary in Frameworks */,
+				461AD0C22CCC3BDE002B3774 /* rswift in Frameworks */,
+				46E85CAA2CCC0738007D92C1 /* Dependencies in Frameworks */,
+				46E85CAC2CCC0738007D92C1 /* DependenciesMacros in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +56,8 @@
 		46001C852CCBF07E00D656D3 = {
 			isa = PBXGroup;
 			children = (
-				46001C902CCBF07E00D656D3 /* ios-app */,
+				46001C902CCBF07E00D656D3 /* Application */,
+				46001CBA2CCBFC2700D656D3 /* Shared */,
 				46001C8F2CCBF07E00D656D3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,12 +84,22 @@
 			buildRules = (
 			);
 			dependencies = (
+				461AD0C42CCC3C10002B3774 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				46001C902CCBF07E00D656D3 /* ios-app */,
+				46001C902CCBF07E00D656D3 /* Application */,
+				46001CBA2CCBFC2700D656D3 /* Shared */,
 			);
 			name = "ios-app";
 			packageProductDependencies = (
+				46E85CA62CCC06F2007D92C1 /* Alamofire */,
+				46E85CA92CCC0738007D92C1 /* Dependencies */,
+				46E85CAB2CCC0738007D92C1 /* DependenciesMacros */,
+				46E85CC22CCC1C58007D92C1 /* KeychainAccess */,
+				4619CA652CCC23E900C3D9FE /* SwiftNavigation */,
+				4619CA672CCC23E900C3D9FE /* SwiftUINavigation */,
+				461AD0BF2CCC3BDE002B3774 /* RswiftLibrary */,
+				461AD0C12CCC3BDE002B3774 /* rswift */,
 			);
 			productName = "ios-app";
 			productReference = 46001C8E2CCBF07E00D656D3 /* ios-app.app */;
@@ -94,6 +129,13 @@
 			);
 			mainGroup = 46001C852CCBF07E00D656D3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				46E85CA52CCC06F2007D92C1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				46E85CA82CCC0738007D92C1 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				46E85CC12CCC1C58007D92C1 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				4619CA642CCC23E900C3D9FE /* XCRemoteSwiftPackageReference "swift-navigation" */,
+				461AD0BE2CCC3BDE002B3774 /* XCRemoteSwiftPackageReference "R" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 46001C8F2CCBF07E00D656D3 /* Products */;
 			projectDirPath = "";
@@ -123,6 +165,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		461AD0C42CCC3C10002B3774 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 461AD0C32CCC3C10002B3774 /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		46001C9A2CCBF07F00D656D3 /* Debug */ = {
@@ -251,7 +300,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ios-app/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 73AGDSA9QN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -260,6 +309,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -280,7 +330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ios-app/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 73AGDSA9QN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -289,6 +339,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -324,6 +375,97 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4619CA642CCC23E900C3D9FE /* XCRemoteSwiftPackageReference "swift-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-navigation";
+			requirement = {
+				kind = exactVersion;
+				version = 2.2.2;
+			};
+		};
+		461AD0BE2CCC3BDE002B3774 /* XCRemoteSwiftPackageReference "R" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift";
+			requirement = {
+				kind = exactVersion;
+				version = 7.7.0;
+			};
+		};
+		46E85CA52CCC06F2007D92C1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = exactVersion;
+				version = 5.8.1;
+			};
+		};
+		46E85CA82CCC0738007D92C1 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = exactVersion;
+				version = 1.4.1;
+			};
+		};
+		46E85CC12CCC1C58007D92C1 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = exactVersion;
+				version = 4.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4619CA652CCC23E900C3D9FE /* SwiftNavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4619CA642CCC23E900C3D9FE /* XCRemoteSwiftPackageReference "swift-navigation" */;
+			productName = SwiftNavigation;
+		};
+		4619CA672CCC23E900C3D9FE /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4619CA642CCC23E900C3D9FE /* XCRemoteSwiftPackageReference "swift-navigation" */;
+			productName = SwiftUINavigation;
+		};
+		461AD0BF2CCC3BDE002B3774 /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 461AD0BE2CCC3BDE002B3774 /* XCRemoteSwiftPackageReference "R" */;
+			productName = RswiftLibrary;
+		};
+		461AD0C12CCC3BDE002B3774 /* rswift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 461AD0BE2CCC3BDE002B3774 /* XCRemoteSwiftPackageReference "R" */;
+			productName = rswift;
+		};
+		461AD0C32CCC3C10002B3774 /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 461AD0BE2CCC3BDE002B3774 /* XCRemoteSwiftPackageReference "R" */;
+			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		46E85CA62CCC06F2007D92C1 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46E85CA52CCC06F2007D92C1 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		46E85CA92CCC0738007D92C1 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46E85CA82CCC0738007D92C1 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		46E85CAB2CCC0738007D92C1 /* DependenciesMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46E85CA82CCC0738007D92C1 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = DependenciesMacros;
+		};
+		46E85CC22CCC1C58007D92C1 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46E85CC12CCC1C58007D92C1 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46001C862CCBF07E00D656D3 /* Project object */;
 }
