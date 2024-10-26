@@ -8,12 +8,17 @@
 import Foundation
 import Dependencies
 import KeychainAccess
+import Combine
 
 // MARK: - Protocol
 
 public protocol IAuthService {
     
-    func auth() async throws -> User.Responses.Full
+//    var isLoggedInPublisher: CurrentValueSubject<Bool, Never> { get set }
+    
+    func register(user: User.Parameters.Create) async throws -> User.Responses.Full
+    
+    func auth(user: User.Parameters.Retrieve) async throws -> Token
     
     func logout() async throws
 }
@@ -36,6 +41,8 @@ public extension DependencyValues {
 
 struct AuthService: IAuthService {
     
+//    var isLoggedInPublisher = CurrentValueSubject<Bool, Never>(false)
+    
     // MARK: - Dependencies
     
     @Dependency(\.requestsService) var requestsService
@@ -44,20 +51,41 @@ struct AuthService: IAuthService {
     
     // MARK: - Methods
     
-    func auth() async throws -> User.Responses.Full {
+    func register(user: User.Parameters.Create) async throws -> User.Responses.Full {
         
-        let response = try await requestsService.request(
-            path: "",
-            method: .post,
-//            parameters: nil,
-            requestType: .session
-        )
-            .serializingDecodable(Auth.Responses.Full.self, decoder: coderService.decoder)
+        let response = try await requestsService
+            .request(
+                path: "/register",
+                method: .post,
+                parameters: user,
+                requestType: .session
+            )
+            .serializingDecodable(User.Responses.Full.self, decoder: coderService.decoder)
             .value
-        return response.user
+        
+        return response
+    }
+    
+    func auth(user: User.Parameters.Retrieve) async throws -> Token {
+        
+        let response = try await requestsService
+            .request(
+                path: "/token",
+                method: .post,
+                parameters: user,
+                requestType: .session
+            )
+            .serializingDecodable(Token.self, decoder: coderService.decoder)
+            .value
+        
+        secureStorageService.setAccess(token: response)
+//        isLoggedInPublisher.send(true)
+        
+        return response
     }
     
     func logout() async throws {
-        //
+        secureStorageService.setAccess(token: nil)
+//        isLoggedInPublisher.send(false)
     }
 }

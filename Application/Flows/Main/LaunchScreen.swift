@@ -25,9 +25,9 @@ struct LaunchScreen: View {
     var body: some View {
         ZStack {
             Color.yellow
-            Image(systemName: "person")
+            Image("oggetto-logo_mono-dark-hor-eng_mono-dark-hor-eng")
                 .resizable()
-                .frame(width: 150, height: 150)
+                .frame(width: 250, height: 100)
         }
         .ignoresSafeArea()
         .onAppear {

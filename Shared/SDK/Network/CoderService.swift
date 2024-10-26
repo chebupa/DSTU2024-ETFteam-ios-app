@@ -43,12 +43,14 @@ struct CoderService: ICoderService {
     var decoder: JSONDecoder = {
         var decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
     
     var bodyEncoder: JSONParameterEncoder = {
         var encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+        encoder.keyEncodingStrategy = .convertToSnakeCase
         return JSONParameterEncoder(encoder: encoder)
     }()
     

@@ -112,7 +112,7 @@ struct RequestsService: IRequestsService {
     // MARK: - Init
     
     private var base: URL {
-        URL(string: "https://domain.com")!
+        URL(string: "https://etf-team.ru/api")!
     }
     private var session: Session
     private var authenticator: JWTAuthenticator
@@ -159,8 +159,8 @@ extension RequestsService {
         var interceptor: RequestInterceptor?
         switch requestType {
         case .session:
-            if let token = secureStorageService.refreshToken {
-                headers.add(.authorization(bearerToken: token.value))
+            if let token = secureStorageService.accessToken {
+                headers.add(.authorization(bearerToken: token))
             }
         case .other:
             interceptor = AuthenticationInterceptor(

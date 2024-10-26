@@ -13,11 +13,12 @@ struct JWTCredential: AuthenticationCredential {
     
     var token: Token?
     
-    var requiresRefresh: Bool {
-        guard token?.value != nil, let expiration = token?.expiration else { return false }
-        
-        return expiration <= Date.now
-    }
+    var requiresRefresh: Bool { false }
+//    var requiresRefresh: Bool {
+//        guard token?.value != nil, let expiration = token?.expiration else { return false }
+//        
+//        return expiration <= Date.now
+//    }
 }
 
 final class JWTAuthenticator: Authenticator {
@@ -34,25 +35,25 @@ final class JWTAuthenticator: Authenticator {
     func apply(_ credential: JWTCredential, to urlRequest: inout URLRequest) {
         //loggerService.log(.debug, "Apply with:\(credential)")
         guard let token = credential.token else { return }
-        urlRequest.headers.add(.authorization(bearerToken: token.value))
+        urlRequest.headers.add(.authorization(bearerToken: token))
     }
     
     func refresh(_ credential: JWTCredential, for session: Session, completion: @escaping (Result<JWTCredential, Error>) -> Void) {
         requestsService
-            .request(path: "/v1/refresh", method: .post, requestType: .session)
-            .responseDecodable(of: Auth.Responses.Partial.self, decoder: coderService.decoder) { response in
+            .request(path: "/token", method: .post, requestType: .session)
+            .responseDecodable(of: Token.self, decoder: coderService.decoder) { response in
                 switch response.result {
                 case .success(let value):
                     //self.loggerService.log(.pulse, .debug, "Refresh succes respone:\(value) with:\(credential)")
-                    self.secureStorageService.setAccess(token: value.accessToken)
-                    if let refreshToken = value.refreshToken {
-                        self.secureStorageService.setRefresh(token: refreshToken)
-                    }
+                    self.secureStorageService.setAccess(token: value)
+//                    if let refreshToken = value.refreshToken {
+//                        self.secureStorageService.setRefresh(token: refreshToken)
+//                    }
                     let credential = JWTCredential(token: self.secureStorageService.accessToken)
                     completion(.success(credential))
                 case .failure(let error):
                     //self.loggerService.log(.debug, "Refresh failure respone:\(error) with:\(credential)")
-                    self.secureStorageService.setRefresh(token: nil)
+//                    self.secureStorageService.setRefresh(token: nil)
                     self.secureStorageService.setAccess(token: nil)
                     completion(.failure(error))
                 }
@@ -79,6 +80,6 @@ final class JWTAuthenticator: Authenticator {
     func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: JWTCredential) -> Bool {
         //loggerService.log(.debug, "Is Request url:\(String(describing: urlRequest.url?.absoluteString)) compare with:\(credential)")
         guard let token = credential.token else { return true }
-        return urlRequest.headers.contains(.authorization(bearerToken: token.value))
+        return urlRequest.headers.contains(.authorization(bearerToken: token))
     }
 }

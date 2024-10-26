@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
+import Dependencies
 
 enum AuthType {
+    
     case login
     case register
 }
 
 protocol IAuthDelegate: AnyObject {
+    
     func changeAuthType(to authType: AuthType)
+    
+    func register(data: User.Parameters.Create)
+    
+    func auth(data: User.Parameters.Retrieve)
 }
 
 // MARK: - State
@@ -33,6 +40,10 @@ final class AuthState: ObservableObject {
     
     @Published var choosedAuthType: AuthType = .login
     
+    // MARK: - Services
+    
+    @Dependency(\.authService) private var authService
+    
     // MARK: - Init
     
     init() {}
@@ -41,6 +52,19 @@ final class AuthState: ObservableObject {
 // MARK: - IAuthDelegate
 
 extension AuthState: IAuthDelegate {
+    
+    func register(data: User.Parameters.Create) {
+        Task {
+            _ = try await authService.register(user: data)
+            _ = try await authService.auth(user: .init(username: data.email, password: data.password))
+        }
+    }
+    
+    func auth(data: User.Parameters.Retrieve) {
+        Task {
+            try await authService.auth(user: data)
+        }
+    }
     
     func changeAuthType(to authType: AuthType) {
         withAnimation(.smooth) {

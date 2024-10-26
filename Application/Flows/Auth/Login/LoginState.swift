@@ -17,16 +17,19 @@ final class LoginState: ObservableObject {
     
     var screen: LoginScreen { LoginScreen(state: self) }
     
+    // MARK: - Properties
+    
+    @Published var userData: User.Parameters.Retrieve = .init(username: "", password: "")
+    
     // MARK: - Init
     
     init(delegate: IAuthDelegate? = nil) {
         self.delegate = delegate
     }
-}
-
-// MARK: - Methods
-
-extension LoginState {
     
-    func submit() {}
+    // MARK: - Methods
+    
+    func submitLogin() {
+        delegate?.auth(data: userData)
+    }
 }

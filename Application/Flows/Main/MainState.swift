@@ -8,6 +8,7 @@
 import Foundation
 import Dependencies
 import SwiftUINavigation
+import Combine
 
 // MARK: - State
 
@@ -20,36 +21,28 @@ final class MainState: ObservableObject {
     // MARK: - SubScreens
     
     lazy var authState = AuthState()
-    lazy var eventsState = EventsState()
-    lazy var spacesState = SpacesState()
-    lazy var profileState = ProfileState()
     
     let tabScreens: [any Tabbable] = [EventsState(), SpacesState(), ProfileState()]
     
     // MARK: - Properties
     
     @Published var launched: Bool = false
-    @Published var loggedIn: Bool = true
+    @Published var loggedIn: Bool = false
     
-    // MARK: - Navigation
+    private var bag = Set<AnyCancellable>()
     
-    @CasePathable
-    enum Destination {
-        case register
-        case login
-    }
-    
-    @Published var destination: Destination?
-    
-    // MARK: - Services
-    
-//    @Dependency(\.date) var date
-//    @Dependency(\.secureStorageService) var storageService
-//    @Dependency(\.secureStorageService) var storageService
+//    @Dependency(\.currentIAmStorageService) var currentIAmStorageService
+    @Dependency(\.secureStorageService) private var secureStorageService
     
     // MARK: - Init
     
-    init() {}
+    init() {
+        secureStorageService.isLoggedInPublisher
+            .sink { isLoggedIn in
+                self.loggedIn = isLoggedIn
+            }
+            .store(in: &bag)
+    }
 }
 
 // MARK: - Methods

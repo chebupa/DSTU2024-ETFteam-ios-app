@@ -22,13 +22,16 @@ struct RegistrationScreen: View {
             Image("oggetto-logo_tonal-hor-eng_tonal-hor-eng")
                 .resizable()
                 .frame(width: 250, height: 86)
-            TextField("E-mail", text: .constant(""))
+            TextField("E-mail", text: $state.userData.email)
                 .textFieldStyle(.roundedBorder)
-            TextField("Имя", text: .constant(""))
+                .textInputAutocapitalization(.none)
+            TextField("Имя", text: $state.userData.fullName)
                 .textFieldStyle(.roundedBorder)
-            TextField("Пароль", text: .constant(""))
+                .textInputAutocapitalization(.none)
+            TextField("Пароль", text: $state.userData.password)
                 .textFieldStyle(.roundedBorder)
-            Button("Зарегистрироваться") {}
+                .textInputAutocapitalization(.none)
+            Button("Зарегистрироваться") { state.submitRegistration() }
                 .buttonStyle(OGTButtonStyle())
             Button("Уже есть аккаунт? Войти") {
                 state.delegate?.changeAuthType(to: .login)
