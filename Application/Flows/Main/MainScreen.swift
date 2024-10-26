@@ -18,7 +18,7 @@ struct MainScreen: View {
     // MARK: - Body
     
     var body: some View {
-        if state.launched {
+        if true {
             if true {
 //            if state.loggedIn {
                 TabView {

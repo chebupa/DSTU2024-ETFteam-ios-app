@@ -29,7 +29,8 @@ extension Event.Responses {
         var title: String
         var description: String
         var space: String
-        var progress: Int
         
+        var completeProgress: Int
+        var totalProgress: Int
     }
 }

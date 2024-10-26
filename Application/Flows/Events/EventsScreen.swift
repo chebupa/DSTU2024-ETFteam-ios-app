@@ -18,12 +18,77 @@ struct EventsScreen: View {
     // MARK: - Body
     
     var body: some View {
-        Text("Events screen")
+        ScrollView(.vertical) {
+            switch state.state {
+            case .loading:
+                Text("loading")
+            case .loaded(let events):
+                makeLoadedView(events: events)
+            case .error(let error):
+                Text(error.localizedDescription)
+            }
+        }
+        .padding()
+        .searchable(text: $state.searchText, prompt: "Search events")
+        .toolbar {
+            ToolbarItem {
+                Menu {
+                    Button("") {}
+                    DatePicker(
+                        "picker",
+                        selection: .constant(Date()),
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.wheel)
+                } label: {
+                    Text("menu")
+                }
+
+            }
+        }
+        .navigationDestination(item: $state.destination.openEvent) { event in
+            EventScreen(event: event)
+        }
+    }
+}
+
+// MARK: - Subviews
+
+extension EventsScreen {
+    
+    @ViewBuilder
+    func makeLoadedView(events: [Event.Responses.Full]) -> some View {
+        ForEach(events) { event in
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(event.title)
+                        .bold()
+                        .font(.system(size: 22))
+                    Spacer()
+                    Text(event.space)
+                }
+                Text(event.description)
+                    .font(.system(size: 14))
+                    .opacity(0.8)
+                ProgressView(value: event.completeProgress.double, total: event.totalProgress.double)
+                HStack {
+                    Text("\(event.completeProgress)")
+                    Spacer()
+                    Text("\(event.totalProgress)")
+                }
+                .font(.system(size: 12))
+            }
+            .padding()
+            .background(Color(uiColor: .systemGray6).opacity(0.8))
+            .clipShape(.rect(cornerRadius: 10))
+            .onTapGesture { state.destination = .openEvent(event) }
+        }
     }
 }
 
 // MARK: - Preview
 
 #Preview {
-    EventsScreen(state: EventsState())
+    MainScreen(state: MainState())
+//    EventsScreen(state: EventsState())
 }
