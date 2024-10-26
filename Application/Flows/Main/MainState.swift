@@ -40,6 +40,7 @@ final class MainState: ObservableObject {
         secureStorageService.isLoggedInPublisher
             .sink { isLoggedIn in
                 self.loggedIn = isLoggedIn
+                print("IS LOGGED IN")
             }
             .store(in: &bag)
     }

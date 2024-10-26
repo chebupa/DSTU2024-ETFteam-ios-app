@@ -19,8 +19,8 @@ struct MainScreen: View {
     
     var body: some View {
         if true {
-            if true {
-//            if state.loggedIn {
+//            if true {
+            if state.loggedIn {
                 TabView {
                     ForEach(state.tabScreens, id: \.id) { tabScreen in
                         NavigationStack {

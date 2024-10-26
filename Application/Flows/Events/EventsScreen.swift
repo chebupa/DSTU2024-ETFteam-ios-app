@@ -32,20 +32,19 @@ struct EventsScreen: View {
         .searchable(text: $state.searchText, prompt: "Search events")
         .toolbar {
             ToolbarItem {
-                Menu {
-                    Button("") {}
-                    DatePicker(
-                        "picker",
-                        selection: .constant(Date()),
-                        displayedComponents: .date
-                    )
-                    .datePickerStyle(.wheel)
-                } label: {
-                    Text("menu")
-                }
-
+//                Button("", systemImage: "calendar") {
+//                    state.destination = .openCalendarSheet
+//                }
             }
         }
+//        .sheet(item: $state.destination.openCalendarSheet) { _ in
+//            DatePicker(
+//                "picker",
+//                selection: .constant(Date()),
+//                displayedComponents: .date
+//            )
+//            .datePickerStyle(.wheel)
+//        }
         .navigationDestination(item: $state.destination.openEvent) { event in
             EventScreen(event: event)
         }

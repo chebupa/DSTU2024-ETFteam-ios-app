@@ -61,7 +61,7 @@ struct SecureStorageService: ISecureStorageService {
         store = Keychain(
             server: "https://etf-team.ru",
             protocolType: .https,
-            accessGroup: "teamID.group.etf"
+            accessGroup: "com.ETFTeam.ios-app"
         )
         
         encoder = JSONEncoder()

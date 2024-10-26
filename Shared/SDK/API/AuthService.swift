@@ -80,13 +80,17 @@ struct AuthService: IAuthService {
             .serializingDecodable(Token.self, decoder: coderService.decoder)
             .value
         
-        secureStorageService.setAccess(token: response)
+        UserDefaults().set(response, forKey: "token")
+        secureStorageService.isLoggedInPublisher.send(true)
+        
+//        secureStorageService.setAccess(token: response)
 //        isLoggedInPublisher.send(true)
         
         return response
     }
     
     func logout() async throws {
+        UserDefaults().removeObject(forKey: "token")
         secureStorageService.setAccess(token: nil)
 //        isLoggedInPublisher.send(false)
     }

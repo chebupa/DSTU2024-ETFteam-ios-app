@@ -53,6 +53,7 @@ final class EventsState: ObservableObject, Tabbable {
     @CasePathable
     enum Destination {
         case openEvent(Event.Responses.Full)
+        case openCalendarSheet(String = "openCalendarSheet")
     }
     
     @Published var destination: Destination?
