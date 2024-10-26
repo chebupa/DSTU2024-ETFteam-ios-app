@@ -10,6 +10,8 @@ import Dependencies
 import KeychainAccess
 import Combine
 
+public typealias Token = String
+
 // MARK: - Protocol
 
 public protocol IAuthService {

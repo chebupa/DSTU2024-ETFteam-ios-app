@@ -20,6 +20,10 @@ final class EventsState: ObservableObject, Tabbable {
     
     var screen: AnyView { AnyView(EventsScreen(state: self)) }
     
+    // MARK: - State
+    
+    
+    
     // MARK: - Init
     
     init() {}
