@@ -153,8 +153,10 @@ extension RequestsService {
         
         // Обработка Headers
         var headers = HTTPHeaders()
-        headers.requesterType = secureStorageService.currentIAm
-        headers.deviceId = secureStorageService.deviceId
+//        headers.requesterType = secureStorageService.currentIAm
+//        headers.deviceId = secureStorageService.deviceId
+        headers.add(.accept("application/json"))
+        headers.add(.contentType("application/x-www-form-urlencoded"))
         
         var interceptor: RequestInterceptor?
         switch requestType {
