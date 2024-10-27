@@ -23,7 +23,11 @@ struct EventsScreen: View {
             case .loading:
                 Text("loading")
             case .loaded(let events):
-                makeLoadedView(events: events)
+                if events.count > 0 {
+                    makeLoadedView(events: events)
+                } else {
+                    Text("Пока нет испытаний")
+                }
             case .error(let error):
                 Text(error.localizedDescription)
             }

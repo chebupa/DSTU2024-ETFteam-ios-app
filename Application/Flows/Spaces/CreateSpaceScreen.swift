@@ -18,6 +18,10 @@ struct CreateSpaceScreen: View {
     
     var body: some View {
         VStack {
+            Text("Создание пространства")
+                .font(.system(size: 32))
+                .bold()
+                .multilineTextAlignment(.center)
             TextField("Название", text: $name)
                 .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.none)
@@ -25,11 +29,17 @@ struct CreateSpaceScreen: View {
                 .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.none)
             Button("Создать") {
-//                create(space: .init(name: name, description: description))
+                create(space: .init(name: name, description: description))
             }
             .buttonStyle(OGTButtonStyle())
         }
         .padding()
+    }
+    
+    func create(space: Space.Parameters.Create) {
+        Task {
+            try await spacesService.create(space: space)
+        }
     }
 }
 
