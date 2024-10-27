@@ -56,7 +56,7 @@ extension AuthState: IAuthDelegate {
     func register(data: User.Parameters.Create) {
         Task {
             _ = try await authService.register(user: data)
-            _ = try await authService.auth(user: .init(username: data.email, password: data.password))
+            _ = try await authService.auth(user: .init(password: data.password, username: data.email))
         }
     }
     

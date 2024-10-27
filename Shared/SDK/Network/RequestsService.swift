@@ -156,12 +156,12 @@ extension RequestsService {
 //        headers.requesterType = secureStorageService.currentIAm
 //        headers.deviceId = secureStorageService.deviceId
         headers.add(.accept("application/json"))
-        headers.add(.contentType("application/x-www-form-urlencoded"))
+        headers.add(.contentType("application/json"))
         
         var interceptor: RequestInterceptor?
         switch requestType {
         case .session:
-            if let token = secureStorageService.accessToken {
+            if let token = UserDefaults().string(forKey: "token") {
                 headers.add(.authorization(bearerToken: token))
             }
         case .other:

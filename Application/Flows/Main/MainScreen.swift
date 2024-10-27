@@ -32,6 +32,16 @@ struct MainScreen: View {
                 }
             } else {
                 state.authState.screen
+                    .onAppear {
+                        if let token = UserDefaults().string(forKey: "token") {
+                            state.loggedIn = true
+                        }
+                    }
+                    .onReceive(state.secureStorageService.isLoggedInPublisher) { value in
+                        withAnimation(.smooth) {
+                            state.loggedIn = value
+                        }
+                    }
             }
         } else {
             LaunchScreen(launched: $state.launched)

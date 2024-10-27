@@ -12,6 +12,7 @@ import Combine
 
 // MARK: - State
 
+@MainActor
 final class MainState: ObservableObject {
     
     // MARK: - Screen
@@ -32,17 +33,23 @@ final class MainState: ObservableObject {
     private var bag = Set<AnyCancellable>()
     
 //    @Dependency(\.currentIAmStorageService) var currentIAmStorageService
-    @Dependency(\.secureStorageService) private var secureStorageService
+    @Dependency(\.secureStorageService) var secureStorageService
+    @Dependency(\.authService) var authService
     
     // MARK: - Init
     
     init() {
-        secureStorageService.isLoggedInPublisher
-            .sink { isLoggedIn in
-                self.loggedIn = isLoggedIn
-                print("IS LOGGED IN")
+        authService.isLoggedInPublisher
+            .sink { value in
+                self.loggedIn = value
             }
             .store(in: &bag)
+//        secureStorageService.isLoggedInPublisher
+//            .sink { isLoggedIn in
+//                self.loggedIn = isLoggedIn
+//                print("IS LOGGED IN")
+//            }
+//            .store(in: &bag)
     }
 }
 

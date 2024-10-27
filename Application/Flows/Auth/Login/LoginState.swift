@@ -19,7 +19,7 @@ final class LoginState: ObservableObject {
     
     // MARK: - Properties
     
-    @Published var userData: User.Parameters.Retrieve = .init(username: "", password: "")
+    @Published var userData: User.Parameters.Retrieve = .init(password: "", username: "")
     
     // MARK: - Init
     

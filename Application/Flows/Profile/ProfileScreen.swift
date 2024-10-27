@@ -18,7 +18,21 @@ struct ProfileScreen: View {
     // MARK: - Body
     
     var body: some View {
-        Text("Profile screen")
+        VStack {
+            Circle()
+                .frame(width: 200, height: 200)
+                .padding(.top)
+            Text("Имя")
+                .font(.system(size: 32))
+                .bold()
+            Text("example@mail.ru")
+            Spacer()
+        }
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                Button("Выйти из аккаунта") { state.logout() }
+            }
+        }
     }
 }
 
@@ -26,4 +40,5 @@ struct ProfileScreen: View {
 
 #Preview {
     ProfileScreen(state: ProfileState())
+//    MainScreen(state: MainState())
 }

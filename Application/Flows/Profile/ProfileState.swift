@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Dependencies
 
 // MARK: - State
 
@@ -20,7 +21,17 @@ final class ProfileState: ObservableObject, Tabbable {
     
     var screen: AnyView { AnyView(ProfileScreen(state: self)) }
     
+    // MARK: - Services
+    
+    @Dependency(\.authService) private var authService
+    
     // MARK: - Init
     
     init() {}
+    
+    // MARK: - Methods
+    
+    func logout() {
+        authService.logout()
+    }
 }

@@ -29,8 +29,9 @@ public extension User.Parameters {
     
     struct Retrieve: Codable {
         
-        var username: String
+//        var username: String
         var password: String
+        var username: String
     }
 }
 

@@ -35,7 +35,7 @@ final class JWTAuthenticator: Authenticator {
     func apply(_ credential: JWTCredential, to urlRequest: inout URLRequest) {
         //loggerService.log(.debug, "Apply with:\(credential)")
         guard let token = credential.token else { return }
-        urlRequest.headers.add(.authorization(bearerToken: token))
+        urlRequest.headers.add(.authorization(bearerToken: token.accessToken))
     }
     
     func refresh(_ credential: JWTCredential, for session: Session, completion: @escaping (Result<JWTCredential, Error>) -> Void) {
@@ -80,6 +80,6 @@ final class JWTAuthenticator: Authenticator {
     func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: JWTCredential) -> Bool {
         //loggerService.log(.debug, "Is Request url:\(String(describing: urlRequest.url?.absoluteString)) compare with:\(credential)")
         guard let token = credential.token else { return true }
-        return urlRequest.headers.contains(.authorization(bearerToken: token))
+        return urlRequest.headers.contains(.authorization(bearerToken: token.accessToken))
     }
 }

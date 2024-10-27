@@ -10,19 +10,17 @@ import Dependencies
 import KeychainAccess
 import Combine
 
-public typealias Token = String
-
 // MARK: - Protocol
 
 public protocol IAuthService {
     
-//    var isLoggedInPublisher: CurrentValueSubject<Bool, Never> { get set }
+    var isLoggedInPublisher: CurrentValueSubject<Bool, Never> { get set }
     
     func register(user: User.Parameters.Create) async throws -> User.Responses.Full
     
     func auth(user: User.Parameters.Retrieve) async throws -> Token
     
-    func logout() async throws
+    func logout()
 }
 
 // MARK: - Dependency Values
@@ -43,7 +41,7 @@ public extension DependencyValues {
 
 struct AuthService: IAuthService {
     
-//    var isLoggedInPublisher = CurrentValueSubject<Bool, Never>(false)
+    var isLoggedInPublisher = CurrentValueSubject<Bool, Never>(false)
     
     // MARK: - Dependencies
     
@@ -72,7 +70,7 @@ struct AuthService: IAuthService {
         
         let response = try await requestsService
             .request(
-                path: "/token",
+                path: "/token-json",
                 method: .post,
                 parameters: user,
                 requestType: .session
@@ -80,18 +78,19 @@ struct AuthService: IAuthService {
             .serializingDecodable(Token.self, decoder: coderService.decoder)
             .value
         
-        UserDefaults().set(response, forKey: "token")
+        UserDefaults().set(response.accessToken, forKey: "token")
         secureStorageService.isLoggedInPublisher.send(true)
         
 //        secureStorageService.setAccess(token: response)
-//        isLoggedInPublisher.send(true)
+        isLoggedInPublisher.send(true)
         
         return response
     }
     
-    func logout() async throws {
+    func logout() {
+        UserDefaults().set(nil, forKey: "token")
         UserDefaults().removeObject(forKey: "token")
-        secureStorageService.setAccess(token: nil)
-//        isLoggedInPublisher.send(false)
+//        secureStorageService.setAccess(token: nil)
+        isLoggedInPublisher.send(false)
     }
 }

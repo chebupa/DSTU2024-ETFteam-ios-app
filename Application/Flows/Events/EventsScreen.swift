@@ -29,6 +29,8 @@ struct EventsScreen: View {
             }
         }
         .padding()
+        .onAppear { state.onAppear() }
+        .refreshable { state.onAppear() }
         .searchable(text: $state.searchText, prompt: "Search events")
         .toolbar {
             ToolbarItem {

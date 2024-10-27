@@ -7,24 +7,52 @@
 
 import Foundation
 
-enum Event {
-    enum Parameters {}
-    enum Responses {}
+public enum Event {
+    public enum Parameters {}
+    public enum Responses {}
 }
 
-extension Event.Parameters {
+public extension Event.Parameters {
     
     struct Create: Codable {
+        
+//        "name": "string",
+//        "prize": "string",
+//        "description": "string",
+//        "achievement_id": 0,
+//        "is_verification_required": true,
+//        "is_estimation_required": true,
+//        "starts_at": "2024-10-27T09:25:22.888Z",
+//        "ends_at_const": "2024-10-27T09:25:22.888Z",
+//        "ends_at_determination_fn": "HIGHER_THAN",
+//        "ends_at_determination_argument": 0,
+//        "results_aggregation_strategy": "SUM",
+//        "prize_determination_fn": "HIGHER_THAN",
+//        "prize_determination_argument": 0
+        
+        var name: String
+        var prize: String
+        var description: String
+        var achievementID: Int
+        var isVerificationRequired: Bool
+        var isEstimationRequired: Bool
+        var startsAt: String
+        var endsAtConst: String
+        var endsAtDeterminationFn: String
+        var endsAtDeterminationArgument: Int
+        var resultsAggregationStrategy: String
+        var prizeDeterminationFn: String
+        var prizeDeterminationArgument: Int
     }
     
     struct Retrive: Codable {}
 }
 
-extension Event.Responses {
+public extension Event.Responses {
     
     struct Full: Codable, Identifiable {
         
-        var id: Int
+        public var id: Int
         
         var title: String
         var description: String
