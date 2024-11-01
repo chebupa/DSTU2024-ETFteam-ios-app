@@ -17,3 +17,4 @@ iOS приложение для создания, отслеживания, вы
 - Xcode 16+
 
 # Project setup
+nothing special
