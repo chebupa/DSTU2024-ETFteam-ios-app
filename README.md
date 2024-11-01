@@ -3,8 +3,10 @@
 iOS приложение для создания, отслеживания, выполнения испытаний внутри групп (компания/семья/...)
 
 # Demo
-
-<img src="ReadMe-assets/events.jpeg" />
+<div>
+  <img src="ReadMe-assets/events.jpeg" width="200px" />
+  <img src="ReadMe-assets/login.jpeg" width="200px" />
+</div>
 
 # System requirements
 
