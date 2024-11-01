@@ -5,9 +5,9 @@ iOS приложение для создания, отслеживания, вы
 # Demo
 <div>
   <img src="ReadMe-assets/events.jpeg" width="200px" />
-  <img src="ReadMe-assets/profile.png" width="200px" />
-  <img src="ReadMe-assets/space.png" width="200px" />
   <img src="ReadMe-assets/spaces.png" width="200px" />
+  <img src="ReadMe-assets/space.png" width="200px" />
+  <img src="ReadMe-assets/profile.png" width="200px" />
 </div>
 
 # System requirements
