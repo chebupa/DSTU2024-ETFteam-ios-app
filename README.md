@@ -4,7 +4,7 @@ iOS приложение для создания, отслеживания, вы
 
 # Demo
 
-демо
+<img src="ReadMe-assets/events.png" />
 
 # System requirements
 
