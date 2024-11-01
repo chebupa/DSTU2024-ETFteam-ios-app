@@ -38,19 +38,7 @@ final class MainState: ObservableObject {
     
     // MARK: - Init
     
-    init() {
-        authService.isLoggedInPublisher
-            .sink { value in
-                self.loggedIn = value
-            }
-            .store(in: &bag)
-//        secureStorageService.isLoggedInPublisher
-//            .sink { isLoggedIn in
-//                self.loggedIn = isLoggedIn
-//                print("IS LOGGED IN")
-//            }
-//            .store(in: &bag)
-    }
+    init() {}
 }
 
 // MARK: - Methods

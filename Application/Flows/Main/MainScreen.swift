@@ -18,33 +18,37 @@ struct MainScreen: View {
     // MARK: - Body
     
     var body: some View {
-        if true {
-//            if true {
-            if state.loggedIn {
-                TabView {
-                    ForEach(state.tabScreens, id: \.id) { tabScreen in
-                        NavigationStack {
-                            tabScreen.screen
-                                .navigationTitle(tabScreen.tabTitle)
+        Group {
+            if true {
+                if state.loggedIn {
+                    TabView {
+                        ForEach(state.tabScreens, id: \.id) { tabScreen in
+                            NavigationStack {
+                                tabScreen.screen
+                                    .navigationTitle(tabScreen.tabTitle)
+                            }
+                            .tabItem { Label(tabScreen.tabTitle, systemImage: tabScreen.tabImage) }
                         }
-                        .tabItem { Label(tabScreen.tabTitle, systemImage: tabScreen.tabImage) }
                     }
+                } else {
+                    state.authState.screen
+                        .onAppear {
+                            if let token = UserDefaults().string(forKey: "token") {
+                                state.loggedIn = true
+                            }
+                        }
+                        .onReceive(state.secureStorageService.isLoggedInPublisher) { value in
+                            withAnimation(.smooth) {
+                                state.loggedIn = value
+                            }
+                        }
                 }
             } else {
-                state.authState.screen
-                    .onAppear {
-                        if let token = UserDefaults().string(forKey: "token") {
-                            state.loggedIn = true
-                        }
-                    }
-                    .onReceive(state.secureStorageService.isLoggedInPublisher) { value in
-                        withAnimation(.smooth) {
-                            state.loggedIn = value
-                        }
-                    }
+                LaunchScreen(launched: $state.launched)
             }
-        } else {
-            LaunchScreen(launched: $state.launched)
+        }
+        .onReceive(state.authService.isLoggedInPublisher) { value in
+            state.loggedIn = value
         }
     }
 }

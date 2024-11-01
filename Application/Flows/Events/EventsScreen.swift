@@ -63,37 +63,34 @@ extension EventsScreen {
     
     @ViewBuilder
     func makeLoadedView(events: [Event.Responses.Full]) -> some View {
-        ForEach(events) { event in
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(event.title)
-                        .bold()
-                        .font(.system(size: 22))
-                    Spacer()
-                    Text(event.space)
-                }
-                Text(event.description)
-                    .font(.system(size: 14))
-                    .opacity(0.8)
-                ProgressView(value: event.completeProgress.double, total: event.totalProgress.double)
-                HStack {
-                    Text("\(event.completeProgress)")
-                    Spacer()
-                    Text("\(event.totalProgress)")
-                }
-                .font(.system(size: 12))
+        ForEach(events, id: \.id) { event in
+            EventWidget(event: event)
+                .onTapGesture { state.destination = .openEvent(event) }
+            
+//            VStack(alignment: .leading) {
+//                HStack {
+//                    Text(event.name)
+//                        .bold()
+//                        .font(.system(size: 22))
+//                    Spacer()
+//                    Text("\(event.spaceID)")
+//                }
+//                Text(event.description)
+//                    .font(.system(size: 14))
+//                    .opacity(0.8)
+//                ProgressView(value: event.currentProgress.double)
+//            }
             }
             .padding()
             .background(Color(uiColor: .systemGray6).opacity(0.8))
             .clipShape(.rect(cornerRadius: 10))
-            .onTapGesture { state.destination = .openEvent(event) }
+//            .onTapGesture { state.destination = .openEvent(event) }
         }
-    }
 }
 
 // MARK: - Preview
 
 #Preview {
-    MainScreen(state: MainState())
-//    EventsScreen(state: EventsState())
+//    MainScreen(state: MainState())
+    EventsScreen(state: EventsState())
 }

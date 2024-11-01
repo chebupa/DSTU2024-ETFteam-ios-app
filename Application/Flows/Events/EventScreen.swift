@@ -16,22 +16,16 @@ struct EventScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(event.title)
+                Text(event.name)
                     .bold()
                     .font(.system(size: 22))
                 Spacer()
-                Text(event.space)
+                Text("\(event.spaceId)")
             }
             Text(event.description)
                 .font(.system(size: 14))
                 .opacity(0.8)
-            ProgressView(value: event.completeProgress.double, total: event.totalProgress.double)
-            HStack {
-                Text("\(event.completeProgress)")
-                Spacer()
-                Text("\(event.totalProgress)")
-            }
-            .font(.system(size: 12))
+            ProgressView(value: event.currentProgress.double)
         }
         .padding()
         .navigationTitle("asd")
@@ -40,12 +34,12 @@ struct EventScreen: View {
 }
 
 #Preview {
-    EventScreen(event: .init(
-        id: 1,
-        title: "title",
-        description: "desc",
-        space: "space",
-        completeProgress: 1,
-        totalProgress: 5
-    ))
+//    EventScreen(event: .init(
+//        id: 1,
+//        title: "title",
+//        description: "desc",
+//        space: "space",
+//        completeProgress: 1,
+//        totalProgress: 5
+//    ))
 }

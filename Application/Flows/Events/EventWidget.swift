@@ -14,23 +14,16 @@ struct EventWidget: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(event.title)
+                Text(event.name)
                     .bold()
                     .font(.system(size: 22))
                 Spacer()
-                Text(event.space)
+                Text("\(event.spaceId)")
             }
             Text(event.description)
                 .font(.system(size: 14))
                 .opacity(0.8)
-            ProgressView(value: event.completeProgress.double, total: event.totalProgress.double)
-                .colorInvert()
-            HStack {
-                Text("\(event.completeProgress)")
-                Spacer()
-                Text("\(event.totalProgress)")
-            }
-            .font(.system(size: 12))
+            ProgressView(value: event.currentProgress.double)
         }
         .padding()
 //        .navigationTitle("asd")

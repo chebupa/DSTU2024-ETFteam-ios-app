@@ -48,7 +48,8 @@ struct SpaceScreen: View {
             TabView {
                 ForEach(1..<8) { _ in
 //                    Text("Испытание 1")
-                    EventWidget(event: .init(id: 1, title: "Испытание 1", description: "описание", space: "asd", completeProgress: 1, totalProgress: 2))
+                    EventWidget(event: .init(id: 1, spaceId: 1, name: "asdsa", state: "asdsad", description: "sadasd", prize: "asdasd", achievementId: 1, isVerificationRequired: false, isEstimationRequired: true, startsAt: "asda", currentProgress: 1))
+//                    EventWidget(event: .init(id: 1, title: "Испытание 1", description: "описание", space: "asd", completeProgress: 1, totalProgress: 2))
                 }
             }
             .tabViewStyle(.page)

@@ -54,11 +54,15 @@ public extension Event.Responses {
         
         public var id: Int
         
-        var title: String
+        var spaceId: Int
+        var name: String
+        var state: String
         var description: String
-        var space: String
-        
-        var completeProgress: Int
-        var totalProgress: Int
+        var prize: String
+        var achievementId: Int
+        var isVerificationRequired: Bool
+        var isEstimationRequired: Bool
+        var startsAt: String
+        var currentProgress: Int
     }
 }
